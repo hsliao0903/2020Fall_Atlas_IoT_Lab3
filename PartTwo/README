@@ -1,0 +1,15 @@
+IoT_Application.cpp
+This is a simple code for sending tweets to the Atlas server on my rawspberry pi.
+Please set the SERVER_IP and SERVER_PORT below for connecting to another Atlas server.
+
+Usage: ./IoT_Application TweetType ThingID SpaceID ServiceName Input
+
+
+Output: response tweet from Atlas server
+
+There are four services for my Atlas IoT-DDL, and they all accept a positive integer as input, examples showing below:
+
+./IoT_Application Service MyRPI_5341 MySmartSpace RedLEDBlink 5
+./IoT_Application Service MyRPI_5341 MySmartSpace DetectButtonPress 5
+./IoT_Application Service MyRPI_5341 MySmartSpace DetectSound 5
+./IoT_Application Service MyRPI_5341 MySmartSpace DetectLight 5

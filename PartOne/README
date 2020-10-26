@@ -1,0 +1,17 @@
+4 bit-things
+4 services
+
+Each bit-thing has 1 service each.
+
+Bit-thing list:
+1. LED
+2. Button
+3. Sound Sensor
+4. Light Sensor
+
+
+Service List:
+1. Blink LED for an amount of times
+2. Detect button press in an amount of time
+3. Detect a sound in an amount of time
+4. Detect the light in an amount of time

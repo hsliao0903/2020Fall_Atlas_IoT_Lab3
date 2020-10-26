@@ -1,0 +1,402 @@
+<Atlas_IoTDDL>
+	<Atlas_Thing>
+		<Descriptive_Metadata>
+			<Thing_ATID>MyRPI_5341</Thing_ATID>
+			<Thing_Name>RPI_AlexLiao</Thing_Name>
+			<Thing_Owner>AlexLiao</Thing_Owner>
+			<Thing_Vendor></Thing_Vendor>
+			<Thing_Model></Thing_Model>
+			<Thing_ReleaseDate>10/2020</Thing_ReleaseDate>
+			<Thing_Type>Thing of Things</Thing_Type>
+			<Thing_OperatingSystem>Raspbian</Thing_OperatingSystem>
+			<Thing_ShortDescription></Thing_ShortDescription>
+			<LongDescription></LongDescription>
+			<Thing_SSID>MySmartSpace</Thing_SSID>
+			<Space_Coordinates></Space_Coordinates>
+			<Space_Name></Space_Name>
+			<Space_Description>It will be in the Virtual Smart Space</Space_Description>
+			<Space_Constraints>
+				<Temperature>
+					<Lower_Bound></Lower_Bound>
+					<Upper_Bound></Upper_Bound>
+				</Temperature>
+				<Humidity>
+					<Lower_Bound></Lower_Bound>
+					<Upper_Bound></Upper_Bound>
+				</Humidity>
+				<Voltage>
+					<Lower_Bound></Lower_Bound>
+					<Upper_Bound></Upper_Bound>
+				</Voltage>
+				<Radio_Interference_Radius></Radio_Interference_Radius>
+				<Safe_Temperature_Radius></Safe_Temperature_Radius>
+			</Space_Constraints>
+		</Descriptive_Metadata>
+		<Administrative_Metadata>
+			<Network_Manager>
+				<Module></Module>
+				<Type></Type>
+				<Network_Name>MySpaceNetwork</Network_Name>
+				<Network_Passcode>MySpaceNetwork</Network_Passcode>
+				<MulticastGroup>
+					<IP>232.1.1.1</IP>
+					<Port>1235</Port>
+				</MulticastGroup>
+				<Communication_Protocol>Sockets</Communication_Protocol>
+				<InterOperableCommunication>
+					<Broker>
+						<Vendor>HiveMQ</Vendor>
+						<Dashboard>http://www.mqtt-dashboard.com/</Dashboard>
+						<IP>broker.hivemq.com</IP>
+						<Port>1883</Port>
+					</Broker>
+					<Topic>
+						<Root>/Atlas</Root>
+						<Network_MQTTClient>/Network/MQTT_Client</Network_MQTTClient>
+						<Network_PrivateBroker>/Network/Private_Broker</Network_PrivateBroker>
+						<Multicast_ThingIdentity>/Multicast/Tweet_ThingIdentity</Multicast_ThingIdentity>
+						<Multicast_EntityIdentity>/Multicast/Tweet_EntityIdentity</Multicast_EntityIdentity>
+						<Multicast_API>/Multicast/API</Multicast_API>
+						<Unicast>/Unicast/Interaction</Unicast>
+					</Topic>
+				</InterOperableCommunication>
+				<OMA_DM>
+					<AccessName>Eclipse Leshan</AccessName>
+					<IP>coap://leshan.eclipseprojects.io</IP>
+					<Port>5683</Port>
+				</OMA_DM>
+			</Network_Manager>
+			<Memory_Manager>
+				<Store_Format></Store_Format>
+				<MemoryUnit_Application></MemoryUnit_Application>
+				<MemoryUnit_Knowledge></MemoryUnit_Knowledge>
+			</Memory_Manager>
+		</Administrative_Metadata>
+		<Thing_Attachment>
+
+		</Thing_Attachment>
+		<Structural_Metadata>
+			<Number_Hardware>4</Number_Hardware>
+			<Number_Software>0</Number_Software>
+			<Number_Hybrid>0</Number_Hybrid>
+			<Number_Entities>4</Number_Entities>
+		</Structural_Metadata>
+	</Atlas_Thing>
+	<Atlas_Entities>
+		<Entity_1>
+			<Descriptive_Metadata>
+				<ID>Entity_1</ID>
+				<Name>RedLED</Name>
+				<Owner>AlexLiao</Owner>
+				<Vendor></Vendor>
+				<Category>Hardware</Category>
+				<Type>Built-In</Type>
+				<Description>It is a Red LED</Description>
+			</Descriptive_Metadata>
+			<Services>
+				<Service_1>
+					<Name>RedLEDBlink</Name>
+					<AppCategory>Lighting</AppCategory>
+					<Type>Action</Type>
+					<Keywords>LED,BLINK,Times</Keywords>
+					<Description>Blink the Red LED for an amount of times.</Description>
+					<Contextual_Constraints>
+						<Time_Window>30seconds</Time_Window>
+						<Usage_Mode></Usage_Mode>
+						<Concurrent></Concurrent>
+					</Contextual_Constraints>
+					<Temporal_Constraints>
+						<Working>
+							<StartTime></StartTime>
+							<EndTime></EndTime>
+						</Working>
+						<Callable>
+							<StartTime></StartTime>
+							<EndTime></EndTime>
+						</Callable>
+					</Temporal_Constraints>
+					<OutputDescription></OutputDescription>
+					<OutputType>void</OutputType>
+					<Service_Formula><![CDATA[
+// ~ Service body C/C++ code block ~
+// You can use the inputs you defined above by name
+// Any return values should match the specified output type
+
+int pinID = 17;
+wiringPiSetupGpio();
+pinMode(pinID,OUTPUT);
+
+
+int i;
+for (i = 0 ; i < times ; i++){
+		DigitalWrite_Blink(pinID, 50);
+	    if (times == i + 1)
+			break;
+		Delay(500);
+}
+
+
+
+
+]]></Service_Formula>
+					<Service_NumberInputs>1</Service_NumberInputs>
+					<Service_InputTypes>int</Service_InputTypes>
+					<Service_InputDescriptions>"times"</Service_InputDescriptions>
+				</Service_1>
+				<Number_Services>1</Number_Services>
+			</Services>
+			<UnboundedService>
+				<Number_UnboundedServices>0</Number_UnboundedServices>
+			</UnboundedService>
+			<Relationships>
+				<Number_Relationships>0</Number_Relationships>
+			</Relationships>
+		</Entity_1>
+		<Entity_2>
+			<Descriptive_Metadata>
+				<ID>Entity_2</ID>
+				<Name>Button</Name>
+				<Owner>AlexLiao</Owner>
+				<Vendor></Vendor>
+				<Category>Hardware</Category>
+				<Type>Built-In</Type>
+				<Description>It is a Button</Description>
+			</Descriptive_Metadata>
+			<Services>
+				<Service_1>
+					<Name>DetectButtonPress</Name>
+					<AppCategory></AppCategory>
+					<Type>Action</Type>
+					<Keywords>Button,Press,Time</Keywords>
+					<Description>Detect a button press in an amount of times</Description>
+					<Contextual_Constraints>
+						<Time_Window>30seconds</Time_Window>
+						<Usage_Mode></Usage_Mode>
+						<Concurrent></Concurrent>
+					</Contextual_Constraints>
+					<Temporal_Constraints>
+						<Working>
+							<StartTime></StartTime>
+							<EndTime></EndTime>
+						</Working>
+						<Callable>
+							<StartTime></StartTime>
+							<EndTime></EndTime>
+						</Callable>
+					</Temporal_Constraints>
+					<OutputDescription>value</OutputDescription>
+					<OutputType>int</OutputType>
+					<Service_Formula><![CDATA[
+// ~ Service body C/C++ code block ~
+// You can use the inputs you defined above by name
+// Any return values should match the specified output type
+
+int pinID = 23;
+wiringPiSetupGpio();
+pinMode(pinID,INPUT);
+
+struct timespec ts;
+clock_t start, end;
+int duration;
+
+clock_gettime( CLOCK_MONOTONIC, &ts );
+start = (uint64_t)ts.tv_sec;
+
+while (true){
+	clock_gettime( CLOCK_MONOTONIC, &ts );
+	end = (uint64_t)ts.tv_sec;
+
+	if (digitalRead(pinID) == HIGH){
+		value = 0;
+		break;
+	}
+
+	duration = end - start;
+
+	if (duration >= time){
+		value = 1;
+		break;
+	}
+}
+
+
+]]></Service_Formula>
+					<Service_NumberInputs>1</Service_NumberInputs>
+					<Service_InputTypes>int</Service_InputTypes>
+					<Service_InputDescriptions>"time"</Service_InputDescriptions>
+				</Service_1>
+				<Number_Services>1</Number_Services>
+			</Services>
+			<UnboundedService>
+				<Number_UnboundedServices>0</Number_UnboundedServices>
+			</UnboundedService>
+			<Relationships>
+				<Number_Relationships>0</Number_Relationships>
+			</Relationships>
+		</Entity_2>
+		<Entity_3>
+			<Descriptive_Metadata>
+				<ID>Entity_3</ID>
+				<Name>SoundSensor</Name>
+				<Owner>AlexLiao</Owner>
+				<Vendor></Vendor>
+				<Category>Hardware</Category>
+				<Type>Built-In</Type>
+				<Description>A sensor detecting a sound</Description>
+			</Descriptive_Metadata>
+			<Services>
+				<Service_1>
+					<Name>DetectSound</Name>
+					<AppCategory></AppCategory>
+					<Type>Action</Type>
+					<Keywords>Sensor,Sound,Time</Keywords>
+					<Description>Detect a sound in an amount of times</Description>
+					<Contextual_Constraints>
+						<Time_Window>30seconds</Time_Window>
+						<Usage_Mode></Usage_Mode>
+						<Concurrent></Concurrent>
+					</Contextual_Constraints>
+					<Temporal_Constraints>
+						<Working>
+							<StartTime></StartTime>
+							<EndTime></EndTime>
+						</Working>
+						<Callable>
+							<StartTime></StartTime>
+							<EndTime></EndTime>
+						</Callable>
+					</Temporal_Constraints>
+					<OutputDescription>value</OutputDescription>
+					<OutputType>int</OutputType>
+					<Service_Formula><![CDATA[
+// ~ Service body C/C++ code block ~
+// You can use the inputs you defined above by name
+// Any return values should match the specified output type
+
+int pinID = 24;
+wiringPiSetupGpio();
+pinMode(pinID,INPUT);
+
+struct timespec ts;
+clock_t start, end;
+int duration;
+
+clock_gettime( CLOCK_MONOTONIC, &ts );
+start = (uint64_t)ts.tv_sec;
+
+while (true){
+	clock_gettime( CLOCK_MONOTONIC, &ts );
+	end = (uint64_t)ts.tv_sec;
+
+	if (digitalRead(pinID) == HIGH){
+		value = 0;
+		break;
+	}
+
+	duration = end - start;
+
+	if (duration >= time){
+		value = 1;
+		break;
+	}
+}
+
+
+]]></Service_Formula>
+					<Service_NumberInputs>1</Service_NumberInputs>
+					<Service_InputTypes>int</Service_InputTypes>
+					<Service_InputDescriptions>"time"</Service_InputDescriptions>
+				</Service_1>
+				<Number_Services>1</Number_Services>
+			</Services>
+			<UnboundedService>
+				<Number_UnboundedServices>0</Number_UnboundedServices>
+			</UnboundedService>
+			<Relationships>
+				<Number_Relationships>0</Number_Relationships>
+			</Relationships>
+		</Entity_3>		
+		<Entity_4>
+			<Descriptive_Metadata>
+				<ID>Entity_4</ID>
+				<Name>LightSensor</Name>
+				<Owner>AlexLiao</Owner>
+				<Vendor></Vendor>
+				<Category>Hardware</Category>
+				<Type>Built-In</Type>
+				<Description>A sensor for light</Description>
+			</Descriptive_Metadata>
+			<Services>
+				<Service_1>
+					<Name>DetectLight</Name>
+					<AppCategory></AppCategory>
+					<Type>Action</Type>
+					<Keywords>Sensor,Light,Time</Keywords>
+					<Description>Detect the brightness of a light in an amount of times</Description>
+					<Contextual_Constraints>
+						<Time_Window>30seconds</Time_Window>
+						<Usage_Mode></Usage_Mode>
+						<Concurrent></Concurrent>
+					</Contextual_Constraints>
+					<Temporal_Constraints>
+						<Working>
+							<StartTime></StartTime>
+							<EndTime></EndTime>
+						</Working>
+						<Callable>
+							<StartTime></StartTime>
+							<EndTime></EndTime>
+						</Callable>
+					</Temporal_Constraints>
+					<OutputDescription>value</OutputDescription>
+					<OutputType>int</OutputType>
+					<Service_Formula><![CDATA[
+// ~ Service body C/C++ code block ~
+// You can use the inputs you defined above by name
+// Any return values should match the specified output type
+
+int pinID = 27;
+wiringPiSetupGpio();
+pinMode(pinID,INPUT);
+
+struct timespec ts;
+clock_t start, end;
+int duration;
+
+clock_gettime( CLOCK_MONOTONIC, &ts );
+start = (uint64_t)ts.tv_sec;
+
+while (true){
+	clock_gettime( CLOCK_MONOTONIC, &ts );
+	end = (uint64_t)ts.tv_sec;
+
+	if (digitalRead(pinID) == LOW){
+		value = 0;
+		break;
+	}
+
+	duration = end - start;
+
+	if (duration >= time){
+		value = 1;
+		break;
+	}
+}
+
+
+]]></Service_Formula>
+					<Service_NumberInputs>1</Service_NumberInputs>
+					<Service_InputTypes>int</Service_InputTypes>
+					<Service_InputDescriptions>"time"</Service_InputDescriptions>
+				</Service_1>
+				<Number_Services>1</Number_Services>
+			</Services>
+			<UnboundedService>
+				<Number_UnboundedServices>0</Number_UnboundedServices>
+			</UnboundedService>
+			<Relationships>
+				<Number_Relationships>0</Number_Relationships>
+			</Relationships>
+		</Entity_4>
+	</Atlas_Entities>
+</Atlas_IoTDDL>
